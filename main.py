@@ -216,7 +216,7 @@ class AutoClicker:
                         self.logger.log("Game over, search for Play button.")
                         if self.search_and_click_play_button(hsv, monitor):
                             self.no_target_counter = (
-                                0  # Resetting the counter after pressing Play button
+                                0  # Resetting the counter after pressing Play
                             )
 
                     time.sleep(0.1)
@@ -228,7 +228,7 @@ class AutoClicker:
 
 if __name__ == "__main__":
     logger = Logger("[https://t.me/sklit_crypto]")
-    logger.log("Welcome to the free autoclicker script for the game Blum")
+    logger.log("Welcome to the free autoclicker script for the game")
     logger.log('After starting the mini-game, press the "~" key on your keyboard')
     target_colors_hex = ["#c9e100", "#bae70e"]
     nearby_colors_hex = ["#abff61", "#87ff27"]
