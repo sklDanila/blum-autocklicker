@@ -216,7 +216,7 @@ class AutoClicker:
                         self.logger.log("Game over, search for Play button.")
                         if self.search_and_click_play_button(hsv, monitor):
                             self.no_target_counter = (
-                                0  # Resetting the counter after pressing Play
+                                0  # Resetting the counter after pressing Play button
                             )
 
                     time.sleep(0.1)
