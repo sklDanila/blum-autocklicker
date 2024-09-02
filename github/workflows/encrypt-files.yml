@@ -1,0 +1,32 @@
+name: Encrypt Files
+
+on:
+  push:
+    paths:
+      - "main.py"
+    branches:
+      - main
+
+jobs:
+  encrypt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup GPG
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --batch
+          echo "${{ secrets.PASSPHRASE }}" | gpg --batch --yes --passphrase-fd 0 -c --output main.py.gpg main.py
+          echo "${{ secrets.PASSPHRASE }}" | gpg --batch --yes --passphrase-fd 0 -c --output requirements.txt.gpg requirements.txt
+          echo "${{ secrets.PASSPHRASE }}" | gpg --batch --yes --passphrase-fd 0 -c --output README.md.gpg README.md
+
+      - name: Commit and push encrypted files
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          rm main.py requirements.txt README.md
+          git add main.py.gpg requirements.txt.gpg README.md.gpg
+          git commit -m "Add encrypted files"
+          git push
